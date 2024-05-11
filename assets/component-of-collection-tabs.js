@@ -3,14 +3,58 @@
  document.addEventListener('DOMContentLoaded', function() {
   
     addCollectionTabsEvent();
+    // addDropdownSelecterEvent();
+
+        // set default button text
+        const ofTabButton = document.getElementById('of-tab-button');
+        const activeCollectionTab = document.querySelector('.of-collection-tabs .tab.active');
+        const tabs = document.querySelectorAll('.of-collection-tabs .tab');
+
+        // const tabs = document.querySelectorAll('.tab');
+        // console.log(tabs);
+      
+       
+        
+        // if(activeCollectionTab){
+        //   ofTabButton.innerHTML = activeCollectionTab.dataset.buttonText;
+        // }else{
+        //   ofTabButton.innerHTML = tabs[0].innerHTML;
+        // }
 
   });
 
+  /* ============== Event listener on body for dropdown ============== */
+
+  document.addEventListener('click', e => {
+    
+    const closestOfDropdown = e.target.closest("[data-of-dropdown]");
+    const isOfDropdownButton = e.target.matches("[data-of-dropdown-button]");
+
+    if( !isOfDropdownButton && closestOfDropdown != null ) return;
+
+    if(isOfDropdownButton){
+      closestOfDropdown.classList.toggle('active');
+    }else{
+      const activeDropdown = document.querySelector('[data-of-dropdown]');
+      activeDropdown.classList.remove('active');
+    }
+
+
+  })
+
 /* ============== External funtions ============== */
+
+function addDropdownSelecterEvent(){
+  const dropdownSelector = document.getElementById('dropdown-selector');
+  const dropdownMenu = document.querySelector('.of-dropdown-menu');
+
+  dropdownSelector.addEventListener('click', function(){
+    dropdownMenu.classList.toggle('active');
+  })
+}
 
   function addCollectionTabsEvent(){
     const tabs = document.querySelectorAll('.of-collection-tabs .tab');
-    console.log(tabs.length);
 
     tabs.forEach(tab => {
     
@@ -25,8 +69,6 @@
             //     });
     
             // tab.classList.add('active');
-            console.log("hello g");
-            console.log(tab.dataset.collectionHandle);
     
             renderCollection(tab.dataset.id, tab.dataset.collectionHandle, tab.dataset.buttonText);
         });
@@ -35,11 +77,7 @@
 
      
 
-        // set default button text
-    const ofTabButton = document.getElementById('of-tab-button');
-    // const tabs = document.querySelectorAll('.tab');
-    // console.log(tabs);
-    ofTabButton.innerHTML = tabs[0].innerHTML;
+    
 
   }
 
@@ -68,7 +106,6 @@
 
         const tabs = document.querySelectorAll('.of-collection-tabs .tab');
         tabs.forEach(tab => {
-            console.log(tab);
             if(tab.dataset.id == selectedTabId){
                 tab.classList.add('active');
             }else{
@@ -82,11 +119,13 @@
 
         //Set button text
         const ofTabButton = document.getElementById('of-tab-button');
+        console.log(ofTabButton);
         ofTabButton.innerHTML = buttonText;
 
         // history.replaceState(null,null, collectionId+'?of-collection-id='+collectionId);
         history.replaceState(null,null, collectionId);
         addCollectionTabsEvent();
+        addDropdownSelecterEvent();
       })
       .catch(error => {
         console.error('Error fetching collection:', error);

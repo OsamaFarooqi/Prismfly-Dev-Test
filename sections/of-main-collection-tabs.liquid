@@ -1,22 +1,42 @@
 {{ 'component-of-collection-tabs.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'component-of-collection-tabs.js' | asset_url }}" defer="defer"></script>
 
-<div class="of-collection-tabs">
+
+
+{% liquid
+    assign currentSelectionButtonText = 'Choose collection'
+    for block in section.blocks
+      case block.type
+        when 'collection'
+        if block.settings.collection.handle contains collection.handle
+        assign currentSelectionButtonText = block.settings.button_text 
+        endif
+      endcase
+    endfor
+%}
+
+<div class="of-collection-tabs {{ currentSelectionButtonText }}">
   <div class="button-container">
-    <button id="of-tab-button" class="of-button"></button>
+    <button id="of-tab-button" class="of-button">{{ currentSelectionButtonText }}</button>
   </div>
-  <div class="inner-container">
-    {% for block in section.blocks %}
-      {% case block.type %}
-        {% when "collection" %}
-          {% assign customID =  block.settings.collection.handle | append: forloop.index0 %}
-          {% comment %} <div class="tab" onclick="renderCollection('{{ block.settings.collection.handle }}', '{{ block.settings.button_text | default: block.settings.collection.title }}')">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div> {% endcomment %}
-          <div class="tab" data-id="{{ customID }}" data-collection-handle="{{ block.settings.collection.handle }}" data-button-text="{{ block.settings.button_text | default: block.settings.collection.title }}">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div>
-      {% endcase %} 
-    {% endfor %}
+
+  <div class="loader"></div>
+  <div class="inner-container of-dropdown" data-of-dropdown>
+    <div id="dropdown-selector" class="dropdown-selector" data-of-dropdown-button>Select collection</div>
+    <div class="of-dropdown-menu">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "collection" %}
+            {% assign customID =  block.settings.collection.handle |  append: "-of-" | append: forloop.index0 %}
+            {% comment %} <div class="tab" onclick="renderCollection('{{ block.settings.collection.handle }}', '{{ block.settings.button_text | default: block.settings.collection.title }}')">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div> {% endcomment %}
+            <div class="tab {% if collection.handle == block.settings.collection.handle %}active{% endif %}" data-id="{{ customID }}" data-collection-handle="{{ block.settings.collection.handle }}" data-button-text="{{ block.settings.button_text | default: block.settings.collection.title }}">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div>
+        {% endcase %} 
+      {% endfor %}
+    </div>
+     
   </div> 
 </div>
-<div class="loader"></div>
+
 
 
 

@@ -1,4 +1,52 @@
 .of-collection-tabs {
+  padding: 20px;
+}
+.of-collection-tabs .button-container .of-button {
+  color: white;
+  background-color: #004790;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  border: none;
+  width: 300px;
+}
+.of-collection-tabs .of-dropdown-menu {
+  display: flex;
+}
+.of-collection-tabs .inner-container .tab {
+  color: #CACACB;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.of-collection-tabs .inner-container .tab.active,
+.of-collection-tabs .inner-container .tab:hover{
+  color: #004790;
+  border-bottom: 5px solid #004790;
+
+}
+.loader {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  border: 16px solid #CACACB;
+  border-radius: 50%;
+  border-top: 16px solid #004790;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s ease infinite;
+  display: none;
+}
+
+.loader.active {
+  display: block;
+}
+@media screen and (min-width: 749px) {
+.of-collection-tabs {
     padding: 15px 25px;
     display: block;
     text-align: center;
@@ -11,14 +59,7 @@
     border-bottom: 1px solid #EBEBEC;
     overflow: auto;
   }
-  .of-collection-tabs .button-container .of-button {
-    color: white;
-    background-color: #004790;
-    padding: 10px 100px;
-    border-radius: 50px;
-    text-transform: uppercase;
-    border: none;
-  }
+
   .of-collection-tabs .inner-container .tab {
     padding: 10px 15px;
     color: #CACACB;
@@ -29,26 +70,85 @@
     width: 150px;
     min-width: 150px;
   }
-  .of-collection-tabs .inner-container .tab.active,
-  .of-collection-tabs .inner-container .tab:hover{
-    color: #004790;
-    border-bottom: 5px solid #004790;
-
-  }
-  .loader {
-    border: 16px solid #CACACB;
-    border-radius: 50%;
-    border-top: 16px solid #004790;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-    
+ 
+}
+  /* Convert tabs into Dropdown for mobile */
+  .dropdown-selector {
     display: none;
   }
-  .loader.active {
-    display: block;
+  @media screen and (max-width: 749px) {
+    .of-collection-tabs{
+      text-align: center;
+    }
+    .of-collection-tabs .inner-container {
+      justify-content: flex-start;
+    }
+
+    .of-collection-tabs .of-dropdown {
+      display: block;
+      position: relative;
+    }
+    .of-collection-tabs .dropdown-selector {
+      display: block;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px 0;
+    }
+    .of-collection-tabs .of-dropdown-menu {
+      display: block;
+    }
+    .of-collection-tabs .inner-container .of-dropdown-menu {
+      /* display: none; */
+      position: absolute;
+      left: 0;
+      top: calc( 100% + .25rem);
+      background-color: #FFFFFF;
+      padding: .75rem;
+      border-radius: .25rem;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0, .50);
+      width: 100%; 
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 120ms ease-in-out, transform 120ms ease-in-out;
+      pointer-events: none;
+    }
+    /* .of-collection-tabs .inner-container .of-dropdown-menu.active {
+      display: block;
+    } */
+
+    .of-collection-tabs .inner-container .tab.active,
+    .of-collection-tabs .inner-container .tab:hover{
+      border-bottom: 2px solid #004790;
+    }
+    .of-dropdown.active > .dropdown-selector {
+      color: #004790;
+    }
+    .of-dropdown.active > .dropdown-selector + .of-dropdown-menu {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .loader {
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+      z-index: 999;
+      border: 5px solid #CACACB;
+      border-radius: 50%;
+      border-top: 5px solid #004790;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s ease infinite;
+    }
   }
+
+
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
