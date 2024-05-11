@@ -1,5 +1,43 @@
 {
   "sections": {
+    "of_main_collection_tabs_aQjiMQ": {
+      "type": "of-main-collection-tabs",
+      "blocks": {
+        "collection_xeMkTH": {
+          "type": "collection",
+          "settings": {
+            "collection": "soap",
+            "tab_heading": "Soap",
+            "button_text": "See all soap"
+          }
+        },
+        "collection_HeykKX": {
+          "type": "collection",
+          "settings": {
+            "collection": "face-mask",
+            "tab_heading": "Face Mask",
+            "button_text": "See all Face Mask"
+          }
+        },
+        "collection_RqXXAM": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "tab_heading": "Home page",
+            "button_text": "See All Home page"
+          }
+        }
+      },
+      "block_order": [
+        "collection_xeMkTH",
+        "collection_HeykKX",
+        "collection_RqXXAM"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
       "settings": {
@@ -30,6 +68,7 @@
     }
   },
   "order": [
+    "of_main_collection_tabs_aQjiMQ",
     "banner",
     "product-grid"
   ]

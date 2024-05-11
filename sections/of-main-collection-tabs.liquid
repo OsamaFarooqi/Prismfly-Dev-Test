@@ -3,15 +3,16 @@
 
 <div class="of-collection-tabs">
   <div class="button-container">
-    <button id="of-tab-button"></button>
+    <button id="of-tab-button" class="of-button"></button>
   </div>
   <div class="inner-container">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when "collection" %}
+          {% assign customID =  block.settings.collection.handle | append: forloop.index0 %}
           {% comment %} <div class="tab" onclick="renderCollection('{{ block.settings.collection.handle }}', '{{ block.settings.button_text | default: block.settings.collection.title }}')">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div> {% endcomment %}
-          <div class="tab" onclick="renderCollection('{{ block.settings.collection.handle }}', '{{ block.settings.button_text | default: block.settings.collection.title }}')">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div>
-      {% endcase %}
+          <div class="tab" data-id="{{ customID }}" data-collection-handle="{{ block.settings.collection.handle }}" data-button-text="{{ block.settings.button_text | default: block.settings.collection.title }}">{{ block.settings.tab_heading | default: block.settings.collection.title }}</div>
+      {% endcase %} 
     {% endfor %}
   </div> 
 </div>
@@ -23,7 +24,7 @@
 {
   "name": "Of Collection Tabs",
   "tag": "section",
-  "class": "section",
+  "class": "section", 
   "disabled_on": {
     "groups": ["header", "footer"]
   },

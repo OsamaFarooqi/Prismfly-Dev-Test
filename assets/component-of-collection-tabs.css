@@ -9,26 +9,36 @@
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #EBEBEC;
+    overflow: auto;
+  }
+  .of-collection-tabs .button-container .of-button {
+    color: white;
+    background-color: #004790;
+    padding: 10px 100px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    border: none;
   }
   .of-collection-tabs .inner-container .tab {
     padding: 10px 15px;
     color: #CACACB;
     font-weight: bold;
-    text-transform: capitalize;
+    text-transform: uppercase;
     border-bottom: 5px solid transparent;
     transition: 0s;
-    width: 
+    width: 150px;
+    min-width: 150px;
   }
   .of-collection-tabs .inner-container .tab.active,
   .of-collection-tabs .inner-container .tab:hover{
-    color: #CACACB;
+    color: #004790;
     border-bottom: 5px solid #004790;
 
   }
   .loader {
-    border: 16px solid #f3f3f3;
+    border: 16px solid #CACACB;
     border-radius: 50%;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid #004790;
     width: 120px;
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
